@@ -1,0 +1,18 @@
+.lineno {
+  font-family: monospace;
+  text-align: right;
+  padding-right: 10px;
+  color: rgb(192, 192, 192);
+}
+
+.blame {
+  font-family: monospace;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.line {
+  font-family: monospace;
+  white-space: pre;
+  padding-left: 10px;
+}
