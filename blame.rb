@@ -23,6 +23,10 @@ class BlameApp < Sinatra::Base
       end
       rev
     end
+
+    def abbrev(sha1)
+      sha1[0...6]
+    end
   end
 
   get '/blame/:rev/*' do |rev, file|
@@ -30,7 +34,7 @@ class BlameApp < Sinatra::Base
     repo = Rugged::Repository.new(repo_path)
     sha1 = commit_sha(repo, rev)
     if sha1 != rev
-      redirect "/blame/#{sha1[0...6]}/#{file}"
+      redirect "/blame/#{abbrev(sha1)}/#{file}"
     end
     blob = repo.blob_at(sha1, file)
     blame = Rugged::Blame.new(repo, file, options = {:newest_commit => sha1})

@@ -2,16 +2,18 @@
 <table>
   <tbody>
   <% @content.each_with_index do |line, lineno| %>
+  <% sha1 = abbrev(@blame[lineno][:final_commit_id]) %>
+  <% orig_path = @blame[lineno][:orig_path] %>
   <tr>
     <td class="lineno"><%= lineno %></td>
     <td class="blame">
-      <a href="/blame/<%= @blame[lineno][:final_commit_id][0...6] %>-prev/<%= @blame[lineno][:orig_path] %>">
-        <%= @blame[lineno][:final_commit_id][0...6] %>^
+      <a href="/blame/<%= sha1 %>-prev/<%= orig_path %>">
+        <%= sha1 %>^
       </a>
     </td>
     <td class="blame">
-      <a href="/blame/<%= @blame[lineno][:final_commit_id][0...6] %>/<%= @blame[lineno][:orig_path] %>">
-        <%= @blame[lineno][:final_commit_id][0...6] %>
+      <a href="/blame/<%= sha1 %>/<%= orig_path %>">
+        <%= sha1 %>
       </a>
     </td>
     <td class="line"><%= line %></td>
