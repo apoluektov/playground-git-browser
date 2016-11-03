@@ -29,6 +29,9 @@ class BlameApp < Sinatra::Base
     repo_path = ENV['repo']
     repo = Rugged::Repository.new(repo_path)
     sha1 = commit_sha(repo, rev)
+    if sha1 != rev
+      redirect "/blame/#{sha1[0...6]}/#{file}"
+    end
     blob = repo.blob_at(sha1, file)
     blame = Rugged::Blame.new(repo, file, options = {:newest_commit => sha1})
     @blame = convert_blame(blame)
