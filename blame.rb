@@ -15,13 +15,22 @@ class BlameApp < Sinatra::Base
       end
       result
     end
+
+    def commit_sha(repo, rev)
+      if rev[-5..-1] == '-prev'
+        commit = repo.lookup(rev[0...-5])
+        return commit.parents[0].oid
+      end
+      rev
+    end
   end
 
   get '/blame/:rev/*' do |rev, file|
     repo_path = ENV['repo']
     repo = Rugged::Repository.new(repo_path)
-    blob = repo.blob_at(rev, file)
-    blame = Rugged::Blame.new(repo, file, options = {:newest_commit => rev})
+    sha1 = commit_sha(repo, rev)
+    blob = repo.blob_at(sha1, file)
+    blame = Rugged::Blame.new(repo, file, options = {:newest_commit => sha1})
     @blame = convert_blame(blame)
     @content = blob.content.split("\n")
     erb :blame

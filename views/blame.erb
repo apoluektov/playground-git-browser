@@ -4,7 +4,11 @@
   <% @content.each_with_index do |line, lineno| %>
   <tr>
     <td class="lineno"><%= lineno %></td>
-    <!-- <td class="blame"><%= @blame[lineno][0...6] %>^</td> -->
+    <td class="blame">
+      <a href="/blame/<%= @blame[lineno][:final_commit_id][0...6] %>-prev/<%= @blame[lineno][:orig_path] %>">
+        <%= @blame[lineno][:final_commit_id][0...6] %>^
+      </a>
+    </td>
     <td class="blame">
       <a href="/blame/<%= @blame[lineno][:final_commit_id][0...6] %>/<%= @blame[lineno][:orig_path] %>">
         <%= @blame[lineno][:final_commit_id][0...6] %>
