@@ -1,6 +1,7 @@
 # myapp.rb
 require 'sinatra'
 require 'rugged'
+require 'rouge'
 
 class BlameApp < Sinatra::Base
   helpers do
@@ -39,7 +40,10 @@ class BlameApp < Sinatra::Base
     blob = repo.blob_at(sha1, file)
     blame = Rugged::Blame.new(repo, file, options = {:newest_commit => sha1})
     @blame = convert_blame(blame)
-    @content = blob.content.split("\n")
+    formatter = Rouge::Formatters::HTML.new
+    lexer = Rouge::Lexer::guess(info = {:filename => file})
+    highlighted = formatter.format(lexer.lex(blob.content))
+    @content = highlighted.split("\n")
     erb :blame
   end
 end

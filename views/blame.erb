@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/style.css">
+<link rel="stylesheet" type="text/css" href="/default.css">
 <table>
   <tbody>
   <% @content.each_with_index do |line, lineno| %>
@@ -16,7 +17,7 @@
         <%= sha1 %>
       </a>
     </td>
-    <td class="line"><%= line %></td>
+    <td class = "codehilite line"><%= line %></td>
   </tr>
   <% end %>
   </tbody>

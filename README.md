@@ -3,6 +3,7 @@
 ### Setup
 
 `bundle install`
+
 `rake run repo=path/to/your/git/repo`
 
 ### Enjoy
