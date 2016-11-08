@@ -6,7 +6,7 @@
   <% sha1 = abbrev(@blame[lineno][:final_commit_id]) %>
   <% orig_path = @blame[lineno][:orig_path] %>
   <tr>
-    <td class="lineno"><%= lineno %></td>
+    <td class="lineno"><%= lineno + 1 %></td>
     <td class="blame">
       <a href="/blame/<%= sha1 %>-prev/<%= orig_path %>">
         <%= sha1 %>^
