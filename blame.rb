@@ -2,6 +2,7 @@
 require 'sinatra'
 require 'rugged'
 require 'rouge'
+require 'json'
 
 class BlameApp < Sinatra::Base
   helpers do
@@ -28,6 +29,14 @@ class BlameApp < Sinatra::Base
     def abbrev(sha1)
       sha1[0...6]
     end
+  end
+
+  get '/commitHeader/:sha1' do |rev|
+    repo_path = ENV['repo']
+    repo = Rugged::Repository.new(repo_path)
+    sha1 = commit_sha(repo, rev)
+    commit = repo.lookup(sha1)
+    { :date => commit.author[:time], :author => commit.author[:name], :message => commit.message }.to_json
   end
 
   get '/blame/:rev/*' do |rev, file|

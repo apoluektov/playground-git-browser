@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/style.css">
 <link rel="stylesheet" type="text/css" href="/default.css">
+<script src="/jquery-3.1.1.min.js"></script>
+<script src="/script.js"></script>
 <table>
   <tbody>
     <tr>
@@ -22,12 +24,12 @@
   <% orig_path = @blame[lineno][:orig_path] %>
   <tr>
     <td class="lineno"><%= lineno + 1 %></td>
-    <td class="blame">
+    <td class="blame load blame-<%= sha1 %>-prev" title="loading ...">
       <a href="/blame/<%= sha1 %>-prev/<%= orig_path %>">
         <%= sha1 %>^
       </a>
     </td>
-    <td class="blame">
+    <td class="blame load blame-<%= sha1 %>" title="loading ...">
       <a href="/blame/<%= sha1 %>/<%= orig_path %>">
         <%= sha1 %>
       </a>
