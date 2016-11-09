@@ -2,6 +2,21 @@
 <link rel="stylesheet" type="text/css" href="/default.css">
 <table>
   <tbody>
+    <tr>
+      <td class="commit-header"><strong>Author</strong></td>
+      <td class="commit-header"><%= @commit.author[:name] %></td>
+    </tr>
+    <tr>
+      <td class="commit-header"><strong>Date</strong></td>
+      <td class="commit-header"><%= @commit.author[:time] %>
+    </tr>
+  </tbody>
+</table>
+
+<div class="commit-message"><%= @commit.message %></div>
+
+<table>
+  <tbody>
   <% @content.each_with_index do |line, lineno| %>
   <% sha1 = abbrev(@blame[lineno][:final_commit_id]) %>
   <% orig_path = @blame[lineno][:orig_path] %>

@@ -37,9 +37,13 @@ class BlameApp < Sinatra::Base
     if sha1 != rev
       redirect "/blame/#{abbrev(sha1)}/#{file}"
     end
+
+    @commit = repo.lookup(sha1)
+
     blob = repo.blob_at(sha1, file)
     blame = Rugged::Blame.new(repo, file, options = {:newest_commit => sha1})
     @blame = convert_blame(blame)
+
     formatter = Rouge::Formatters::HTML.new
     lexer = Rouge::Lexer::guess(info = {:filename => file})
     highlighted = formatter.format(lexer.lex(blob.content))

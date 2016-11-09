@@ -1,3 +1,17 @@
+.commit-header {
+  font-family: monospace;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.commit-message {
+  font-family: monospace;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .lineno {
   font-family: monospace;
   text-align: right;
