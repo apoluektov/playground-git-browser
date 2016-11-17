@@ -6,9 +6,11 @@ $(function(){
     var blameSha1 = null;
     var sha1 = null;
     $.each(classList, function(i, v) {
-      if (v.startsWith("blame-"))
+      if (v.startsWith("blame-")) {
         blameSha1 = v;
         sha1 = v.substring(6);
+        return false;
+      }
     });
     $.getJSON("/commitHeader/" + sha1, function (commitHeader) {
       var title = commitHeader.date + "\n";
