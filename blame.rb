@@ -19,6 +19,10 @@ class BlameApp < Sinatra::Base
     end
 
     def commit_sha(repo, rev)
+      if rev.nil?
+        return repo.head.target.oid
+      end
+
       if rev[-5..-1] == '-prev'
         commit = repo.lookup(rev[0...-5])
         return commit.parents[0].oid
