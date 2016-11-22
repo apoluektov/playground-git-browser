@@ -39,12 +39,14 @@ class BlameApp < Sinatra::Base
     { :date => commit.author[:time], :author => commit.author[:name], :message => commit.message }.to_json
   end
 
-  get '/blame/:rev/*' do |rev, file|
+  get '/blame/*' do |file|
+    rev = params['rev']
+
     repo_path = ENV['repo']
     repo = Rugged::Repository.new(repo_path)
     sha1 = commit_sha(repo, rev)
     if sha1 != rev
-      redirect "/blame/#{abbrev(sha1)}/#{file}"
+      redirect "/blame/#{file}?rev=#{abbrev(sha1)}"
     end
 
     @commit = repo.lookup(sha1)

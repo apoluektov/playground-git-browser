@@ -25,12 +25,12 @@
   <tr>
     <td class="lineno"><%= lineno + 1 %></td>
     <td class="blame load blame-<%= sha1 %>-prev" title="loading ...">
-      <a href="/blame/<%= sha1 %>-prev/<%= orig_path %>">
+      <a href="/blame/<%= orig_path %>?rev=<%= sha1 %>-prev">
         <%= sha1 %>^
       </a>
     </td>
     <td class="blame load blame-<%= sha1 %>" title="loading ...">
-      <a href="/blame/<%= sha1 %>/<%= orig_path %>">
+      <a href="/blame/<%= orig_path %>?rev=<%= sha1 %>">
         <%= sha1 %>
       </a>
     </td>
