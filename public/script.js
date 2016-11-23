@@ -8,7 +8,10 @@ $(function(){
     $.each(classList, function(i, v) {
       if (v.startsWith("blame-")) {
         blameSha1 = v;
-        sha1 = v.substring(6);
+        sha1 = v.substr(6, 6);
+        if (blameSha1.substr(-5) == '-prev') {
+          sha1 += '^';
+        }
         return false;
       }
     });

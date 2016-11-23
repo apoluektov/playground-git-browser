@@ -23,11 +23,7 @@ class BlameApp < Sinatra::Base
         return repo.head.target.oid
       end
 
-      if rev[-5..-1] == '-prev'
-        commit = repo.lookup(rev[0...-5])
-        return commit.parents[0].oid
-      end
-      rev
+      Rugged::Object.rev_parse_oid(repo, rev)
     end
 
     def abbrev(sha1)
@@ -48,9 +44,9 @@ class BlameApp < Sinatra::Base
 
     repo_path = ENV['repo']
     repo = Rugged::Repository.new(repo_path)
-    sha1 = commit_sha(repo, rev)
-    if sha1 != rev
-      redirect "/blame/#{file}?rev=#{abbrev(sha1)}"
+    sha1 = abbrev(commit_sha(repo, rev))
+    if sha1 != abbrev(rev)
+      redirect "/blame/#{file}?rev=#{sha1}"
     end
 
     @commit = repo.lookup(sha1)
