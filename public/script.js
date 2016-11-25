@@ -2,26 +2,13 @@ $(function(){
   $(".blame").hover(function() {
     if (!$(this).hasClass("load"))
       return;
-    var classList = $(this).prop('classList');
-    var blameSha1 = null;
-    var sha1 = null;
-    $.each(classList, function(i, v) {
-      if (v.startsWith("blame-")) {
-        blameSha1 = v;
-        sha1 = v.substr(6, 6);
-        if (blameSha1.substr(-5) == '-prev') {
-          sha1 += '^';
-        }
-        return false;
-      }
-    });
+    var sha1 = $(this).attr("data-blame-sha1");
     $.getJSON("/commitHeader/" + sha1, function (commitHeader) {
       var title = commitHeader.date + "\n";
       title += commitHeader.author + "\n\n";
       title += commitHeader.message.trim();
-      var blameSha1Class = "." + blameSha1;
-      var withBlameSha1 = $(blameSha1Class);
-      withBlameSha1.attr("title", title).removeClass("load");
+      var dataBlameSha1Selector = '*[data-blame-sha1="' + sha1 + '"]';
+      $(dataBlameSha1Selector).attr("title", title).removeClass("load");
     });
   }, function() {
       // unhover
