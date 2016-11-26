@@ -33,12 +33,12 @@
         <%= sha1 %>^
       </a>
     </td>
-    <td class="blame load" data-blame-sha1="<%= sha1 %>" title="loading ...">
+    <td class="blame load" data-blame-sha1="<%= sha1 %>" title="loading ..."  <%= 'data-commit="newest"' if sha1 == abbrev(@commit.oid) %>>
       <a href="/blame/<%= orig_path %>?rev=<%= sha1 %>">
         <%= sha1 %>
       </a>
     </td>
-    <td class = "codehilite line"><%= line %></td>
+    <td class="codehilite line"><%= line %></td>
   </tr>
   <% end %>
   </tbody>
