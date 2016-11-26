@@ -5,12 +5,16 @@
 <table>
   <tbody>
     <tr>
-      <td class="commit-header"><strong>Author</strong></td>
-      <td class="commit-header"><%= @commit.author[:name] %></td>
+      <td class="commit-header"><strong>SHA1</strong></td>
+      <td class="commit-header"><%= @commit.oid %>
     </tr>
     <tr>
       <td class="commit-header"><strong>Date</strong></td>
       <td class="commit-header"><%= @commit.author[:time] %>
+    </tr>
+    <tr>
+      <td class="commit-header"><strong>Author</strong></td>
+      <td class="commit-header"><%= @commit.author[:name] %></td>
     </tr>
   </tbody>
 </table>
